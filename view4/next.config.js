@@ -30,15 +30,5 @@ module.exports = {
             use: ['@svgr/webpack'],
         })
         return config;
-    },
-    async rewrites() {
-        if (process.env.NODE_ENV !== 'production' ) {
-            return [
-                {
-                    source: '/:path*',
-                    destination: 'http://192.168.0.251:9090/v2/:path*',
-                }
-            ]
-        }
     }
 }

@@ -8,7 +8,7 @@ export const initialState = {
     autoLotNum:'0',
     manualLotNum:'0',
     averageNum:'0',
-    averagePrice:'0'
+    waitingForDispatch:'0'
 }
 
 export const LOAD_PROGRESS_STATUS_REQUEST = 'LOAD_PROGRESS_STATUS_REQUEST';
@@ -26,6 +26,14 @@ export const AUTO_LOT_UP_FAILURE = "AUTO_LOT_UP_FAILURE";
 export const MANUAL_LOT_UP = "MANUAL_LOT_UP";
 export const MANUAL_LOT_UP_SUCCESS = "MANUAL_LOT_UP_SUCCESS";
 export const MANUAL_LOT_UP_FAILURE = "MANUAL_LOT_UP_FAILURE";
+
+export const AVERGE_LOT_REQUEST = "AVERGE_LOT_REQUEST";
+export const AVERGE_LOT_SUCCESS = "AVERGE_LOT_SUCCESS";
+export const AVERGE_LOT_FAILURE = "AVERGE_LOT_FAILURE";
+
+export const DISPATCH_NUM_REQUEST = "DISPATCH_NUM_REQUEST";
+export const DISPATCH_NUM_SUCCESS = "DISPATCH_NUM_SUCCESS";
+export const DISPATCH_NUM_FAILURE = "DISPATCH_NUM_FAILURE";
 
 const reducer = (state = initialState, action) => {
     switch(action.type) {
@@ -61,6 +69,22 @@ const reducer = (state = initialState, action) => {
             const manualLotNum = action.data.data;
             return {...state, manualLotNum};
         case MANUAL_LOT_UP_FAILURE:
+            return {...state};
+
+        case AVERGE_LOT_REQUEST:
+            return {...state};
+        case AVERGE_LOT_SUCCESS:
+            console.log("에버리지 랏 석세스", action.data.data)
+            const averageNum = action.data.data;
+            return {...state, averageNum};
+        case AVERGE_LOT_FAILURE:
+            return {...state};
+        case DISPATCH_NUM_REQUEST:
+            return {...state};
+        case DISPATCH_NUM_SUCCESS:
+            const waitingForDispatch = action.data.data;
+            return {...state, waitingForDispatch};
+        case DISPATCH_NUM_FAILURE:
             return {...state};
 
         default:

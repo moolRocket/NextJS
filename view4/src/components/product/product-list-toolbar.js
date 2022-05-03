@@ -76,12 +76,25 @@ export const ProductListToolbar = (props) => {
     }
   }, []);
 
+  const loadAverageLot = useCallback(() => {
+      dispatch({
+        type: 'AVERGE_LOT_REQUEST'
+      });
+  }, []);
+
+  const loadDispatchNum = useCallback(() => {
+    dispatch({
+      type: 'DISPATCH_NUM_REQUEST'
+    });
+}, []);
+
   // 함수...
   const onClickMakeLot = async () => {
     await makeLot(product_sn);
+    await loadAverageLot();
+    await loadDispatchNum();
     await ManualLotUp();
     await searchProducts(start, end);
-
   }
 
   const onClickAutoLot = async () => {

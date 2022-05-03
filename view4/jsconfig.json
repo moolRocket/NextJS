@@ -1,0 +1,8 @@
+{
+  "compilerOptions": {
+    "baseUrl": "."
+  },
+  "include": [
+    "src"
+, "lot-list-results copy.js"  ]
+}

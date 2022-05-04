@@ -69,33 +69,24 @@ export const DashboardSidebar = (props) => {
           height: '100%'
         }}
       >
-        <div>
-          <Box sx={{ p: 3 }}>
+          <Box sx={{ p: 1, paddingLeft:5 }}>
             <NextLink
               href="/"
               passHref
             >
             <img
               alt="mool"
-              src="/static/images/imagelogo.png"
-              width={'56'}
-              height={'56'}
+              src="/static/images/logo_blue.png"
+              width={'200'}
+              height={'200'}
             />
             </NextLink>
           </Box>
-          <Box sx={{ px: 2 }}>
-            <img 
-              alt="Rocket"
-              src="/static/images/textlogo.png"
-              width={'231'}
-              height={'42.5'}
-            />
-          </Box>
-        </div>
         <Divider
           sx={{
             borderColor: '#2D3748',
-            my: 3
+            marginBottom: 3
+            // my: 3
           }}
         />
         <Box sx={{ flexGrow: 1 }}>
@@ -115,7 +106,7 @@ export const DashboardSidebar = (props) => {
             py: 3
           }}
         >
-          <Typography
+          {/* <Typography
             color="neutral.100"
             variant="subtitle2"
           >
@@ -126,7 +117,7 @@ export const DashboardSidebar = (props) => {
             variant="body2"
           >
             Check out our MoolRocket prj.
-          </Typography>
+          </Typography> */}
           <Box
             sx={{
               display: 'flex',

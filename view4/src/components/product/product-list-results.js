@@ -58,7 +58,7 @@ export const ProductListResults = ({ ...rest }) => {
               <TableRow>
                 <TableCell padding="checkbox">
                   <Checkbox
-                    checked={ (selectedProductsSns.length === products.length)}
+                    checked={ products.length !== 0 && (selectedProductsSns.length === products.length)}
                     color="primary"
                     indeterminate={
                       selectedProductsSns.length > 0

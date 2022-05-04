@@ -10,6 +10,7 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { useDispatch, useSelector } from 'react-redux';
+import { LotAccordion } from '../dashboard/lot-accordion';
 
 export const ProductListToolbar = (props) => {
   const dispatch = useDispatch();
@@ -106,6 +107,9 @@ export const ProductListToolbar = (props) => {
   return (
     <Box {...props}>
       <Box sx={{ mt: 3 }}>
+        <Box sx={{ paddingBottom: 3 }}>
+        </Box>
+          <LotAccordion />
         <Card>
           <CardContent>
             <Box

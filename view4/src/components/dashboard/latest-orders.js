@@ -11,9 +11,9 @@ import { SeverityPill } from '../severity-pill';
 import { useSelector } from 'react-redux';
 
 export const LatestOrders = (props) => {
-  
   const { success } = useSelector( state => state.success);
-  console.log("MMM>>", success);
+  const succ = success.slice(0,5)
+  console.log("MMM>>", success.slice(0,4));
   return (
   <Card {...props}>
     <CardHeader title="Latest Orders" />
@@ -50,7 +50,7 @@ export const LatestOrders = (props) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {success.map((suc) => (
+            {succ.map((suc) => (
               <TableRow
                 hover
                 key={suc.BID_SN}

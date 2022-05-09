@@ -1,7 +1,14 @@
 import { Avatar, Card, CardContent, Grid, Typography } from '@mui/material';
 import PaidIcon from '@mui/icons-material/Paid';
+import { useSelector } from 'react-redux';
+import LocalShippingIcon from '@mui/icons-material/LocalShipping';
+import CountUp from 'react-countup';
 
-export const TotalProfit = (props) => (
+export const TotalProfit = (props) => {
+
+  const { waitingForDispatch } = useSelector(state => state.dashboard);
+
+  return (
   <Card {...props}>
     <CardContent>
       <Grid
@@ -15,13 +22,13 @@ export const TotalProfit = (props) => (
             gutterBottom
             variant="overline"
           >
-            AVERAGE PRICE
+            WAITING FOR DISPATCH
           </Typography>
           <Typography
             color="textPrimary"
             variant="h4"
           >
-            $23k
+            <CountUp end={waitingForDispatch}/>
           </Typography>
         </Grid>
         <Grid item>
@@ -32,10 +39,10 @@ export const TotalProfit = (props) => (
               width: 56
             }}
           >
-            <PaidIcon />
+            <LocalShippingIcon />
           </Avatar>
         </Grid>
       </Grid>
     </CardContent>
   </Card>
-);
+)};

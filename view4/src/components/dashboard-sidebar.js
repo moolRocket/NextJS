@@ -10,6 +10,8 @@ import { User as UserIcon } from '../icons/user';
 import { Users as UsersIcon } from '../icons/users';
 import { NavItem } from './nav-item';
 import { TruckIcon } from '../icons/truck'
+import AutoAwesomeMotionIcon from '@mui/icons-material/AutoAwesomeMotion';
+import AssignmentTurnedInIcon from '@mui/icons-material/AssignmentTurnedIn';
 
 const items = [
   {
@@ -24,7 +26,7 @@ const items = [
   },
   {
     href: '/lots',
-    icon: (<UsersIcon fontSize="small" />),
+    icon: (<AutoAwesomeMotionIcon fontSize="small" />),
     title: 'LOT'
   },
   {
@@ -34,7 +36,7 @@ const items = [
   },
   {
     href: '/success',
-    icon: (<UserIcon fontSize="small" />),
+    icon: (<AssignmentTurnedInIcon fontSize="small" />),
     title: '낙찰결과관리'
   }
 ];

@@ -1,6 +1,7 @@
 import { Avatar, Box, Card, CardContent, Grid, Typography } from '@mui/material';
 import SmartToyIcon from '@mui/icons-material/SmartToy';
 import { useSelector } from 'react-redux';
+import CountUp from 'react-countup';
 
 export const AutoLot = (props) => {
   const { autoLotNum } = useSelector(state => state.dashboard);
@@ -28,7 +29,7 @@ export const AutoLot = (props) => {
             color="textPrimary"
             variant="h4"
           >
-            {autoLotNum}  
+            <CountUp end={autoLotNum}/> 
           </Typography>
         </Grid>
         <Grid item>

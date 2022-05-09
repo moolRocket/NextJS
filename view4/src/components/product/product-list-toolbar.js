@@ -54,6 +54,14 @@ export const ProductListToolbar = (props) => {
       type: 'MANUAL_LOT_UP'
     });
 
+    dispatch({
+      type: 'AVERGE_LOT_REQUEST'
+    });
+
+    dispatch({
+      type: 'DISPATCH_NUM_REQUEST'
+    });
+
   }, []);
 
   const makeAutoLot = useCallback(() => {

@@ -2,10 +2,10 @@ import { Avatar, Box, Card, CardContent, Grid, Typography } from '@mui/material'
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import FaceIcon from '@mui/icons-material/Face';
 import { useSelector } from 'react-redux';
+import CountUp from 'react-countup';
 
 export const ManualLot = (props) => {
   const { manualLotNum } = useSelector(state => state.dashboard);
-  
   return (
   <Card {...props}>
     <CardContent>
@@ -26,7 +26,7 @@ export const ManualLot = (props) => {
             color="textPrimary"
             variant="h4"
           >
-          {manualLotNum}
+          <CountUp end={manualLotNum}/>
           </Typography>
         </Grid>
         <Grid item>

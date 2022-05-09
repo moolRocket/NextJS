@@ -40,15 +40,20 @@ export const ProductListToolbar = (props) => {
     });
   }, []);
 
-  const { product_sn } = useSelector(state => state.products);
-  console.log("sn", product_sn);
+  const { products_sn } = useSelector(state => state.products);
+  console.log("sn", products_sn);
 
-  const makeLot = useCallback((product_sn) => {
-    console.log("product_sn makelot herer", product_sn);
+  const makeLot = useCallback((products_sn) => {
+    console.log("products_sn makelot herer", products_sn);
     dispatch({
-      type: 'MAKE_LOT',
-      product_sn
+      type: 'MAKE_LOT_REQUEST',
+      products_sn
     });
+
+    dispatch({
+      type: 'MANUAL_LOT_UP'
+    });
+
   }, []);
 
   const makeAutoLot = useCallback(() => {
@@ -56,51 +61,21 @@ export const ProductListToolbar = (props) => {
     dispatch({
       type: 'MAKE_AUTO_LOT'
     });
-  }, []);
 
-  const { products } = useSelector(state => state.products);
-  console.log("product를 찍어보자", products);
-
-  const AutoLotUp = useCallback(() => {
-    if(products !== null) {
-      dispatch({
-        type: 'AUTO_LOT_UP'
-      });
-    }
-  }, []);
-
-  const ManualLotUp = useCallback(() => {
-    if(products !== null) {
-      dispatch({
-        type: 'MANUAL_LOT_UP'
-      });
-    }
-  }, []);
-
-  const loadAverageLot = useCallback(() => {
-      dispatch({
-        type: 'AVERGE_LOT_REQUEST'
-      });
-  }, []);
-
-  const loadDispatchNum = useCallback(() => {
     dispatch({
-      type: 'DISPATCH_NUM_REQUEST'
+      type: 'AUTO_LOT_UP'
     });
-}, []);
+  }, []);
 
   // 함수...
   const onClickMakeLot = async () => {
-    await makeLot(product_sn);
-    await loadAverageLot();
-    await loadDispatchNum();
-    await ManualLotUp();
+    await makeLot(products_sn);
     await searchProducts(start, end);
+
   }
 
   const onClickAutoLot = async () => {
     await makeAutoLot();
-    await AutoLotUp();
     await searchProducts(start, end);
   }
 

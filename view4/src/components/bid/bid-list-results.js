@@ -107,8 +107,8 @@ function Row(props) {
     dispatch({ 
       type: 'LOAD_BIDS_DATA_REQUEST', 
       params: {
-        start,
-        end,
+        startDate: start,
+        endDate: end,
         bidStatus: 0
       }
     });
@@ -124,15 +124,7 @@ function Row(props) {
       <TableRow
         hover
         key={bid.BID_SN}
-        // selected={selectedBidSns.indexOf(bid.BID_SN) !== -1}
       >
-        {/* <TableCell padding="checkbox">
-          <Checkbox
-            checked={selectedBidSns.indexOf(bid.BID_SN) !== -1}
-            onChange={() => handleSelectOne(bid.BID_SN)}
-            value="true"
-          />
-        </TableCell> */}
         <TableCell>
           <IconButton
             aria-label="expand row"

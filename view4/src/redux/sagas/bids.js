@@ -113,6 +113,7 @@ function* loadmakeSuccessChangeData(action) {
 }
 function* lastmakeSuccessChangeData() {
     yield takeLatest('MAKE_SUCCESS_DATA_REQUEST', loadmakeSuccessChangeData);
+
 }
 
 export default function* loadData3() {

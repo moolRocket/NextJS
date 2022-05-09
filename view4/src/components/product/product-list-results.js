@@ -10,43 +10,44 @@ import { useSelector, useDispatch } from 'react-redux';
 
 export const ProductListResults = ({ ...rest }) => {
   const dispatch = useDispatch();
-  const { products } = useSelector(state => state.products);
-
+  const { products, products_sn } = useSelector(state => state.products);
+  console.log("results", products, products_sn)
   const [selectedProductsSns, setSelectedProductsSns] = useState([]);
 
   const handleSelectAll = (event) => {
-    let newSelectedProductsSns;
+    let products_sn;
     if (event.target.checked) {
-      newSelectedProductsSns = products.map((product) => product.PRODUCT_SN);
+      products_sn = products.map((product) => product.PRODUCT_SN);
     } else {
-      newSelectedProductsSns = [];
+      products_sn = [];
     }
-    setSelectedProductsSns(newSelectedProductsSns);
+    setSelectedProductsSns(products_sn);
+    console.log("all", products_sn)
   };
 
   const handleSelectOne = (PRODUCT_SN) => {
     const selectedIndex = selectedProductsSns.indexOf(PRODUCT_SN);
-    let newSelectedProductsSns = [];
+    let products_sn = [];
 
     if (selectedIndex === -1) {
-      newSelectedProductsSns = newSelectedProductsSns.concat(selectedProductsSns, PRODUCT_SN);
+      products_sn = products_sn.concat(selectedProductsSns, PRODUCT_SN);
     } else if (selectedIndex === 0) {
-      newSelectedProductsSns = newSelectedProductsSns.concat(selectedProductsSns.slice(1));
+      products_sn = products_sn.concat(selectedProductsSns.slice(1));
     } else if (selectedIndex === selectedProductsSns.length - 1) {
-      newSelectedProductsSns = newSelectedProductsSns.concat(selectedProductsSns.slice(0, -1));
+      products_sn = products_sn.concat(selectedProductsSns.slice(0, -1));
     } else if (selectedIndex > 0) {
-      newSelectedProductsSns = newSelectedProductsSns.concat(
+      products_sn = products_sn.concat(
         selectedProductsSns.slice(0, selectedIndex),
         selectedProductsSns.slice(selectedIndex + 1)
       );
     }
-    setSelectedProductsSns(newSelectedProductsSns);
+    setSelectedProductsSns(products_sn);
 
     dispatch({
       type: 'PRODUCT_SN_CHANGE',
-      product_sn: newSelectedProductsSns
+      products_sn: products_sn
     })
-
+    console.log("result sn",setSelectedProductsSns)
   };
 
   return (
@@ -58,7 +59,7 @@ export const ProductListResults = ({ ...rest }) => {
               <TableRow>
                 <TableCell padding="checkbox">
                   <Checkbox
-                    checked={ products.length !== 0 && (selectedProductsSns.length === products.length)}
+                    checked={ products.length !== 0 &&(selectedProductsSns.length === products.length)}
                     color="primary"
                     indeterminate={
                       selectedProductsSns.length > 0

@@ -1,11 +1,7 @@
 import { Avatar, Box, Card, CardContent, Grid, LinearProgress, Typography } from '@mui/material';
-import PlagiarismIcon from '@mui/icons-material/Plagiarism';
-import { useSelector } from 'react-redux';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
 
-export const AverageNumber = (props) => {
-  const { averageNum } = useSelector(state => state.dashboard);
-
-  return (
+export const AverageNumber = (props) => (
   <Card
     sx={{ height: '100%' }}
     {...props}
@@ -22,13 +18,13 @@ export const AverageNumber = (props) => {
             gutterBottom
             variant="overline"
           >
-          AVERAGE NUMBER OF LOTS
+          MAX DONEDEAL LOCATION
           </Typography>
           <Typography
             color="textPrimary"
             variant="h4"
           >
-          {averageNum}
+          경기도 안산시
           </Typography>
         </Grid>
         <Grid item>
@@ -39,7 +35,7 @@ export const AverageNumber = (props) => {
               width: 56
             }}
           >
-            <PlagiarismIcon />
+            <LocationOnIcon />
           </Avatar>
         </Grid>
       </Grid>
@@ -51,4 +47,4 @@ export const AverageNumber = (props) => {
       </Box> */}
     </CardContent>
   </Card>
-)};
+);

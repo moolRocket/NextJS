@@ -28,11 +28,11 @@ function* lastLoadData() {
     yield takeLatest('LOAD_PRODUCTS_DATA_REQUEST', loadProductsData);
 };
 
-async function makeLots(product_sn) {
-    console.log("2> makeLots product_sn", {"product_list": product_sn});
+async function makeLots(products_sn) {
+    console.log("2> makeLots products_sn", {"product_list": products_sn});
     return await axios.post(
         `${gcp_v1}/lot`,
-        {"product_list": product_sn},
+        {"product_list": products_sn},
         {
             headers: {
                 'Content-Type':'application/json',
@@ -44,16 +44,16 @@ async function makeLots(product_sn) {
 function* makeLotsData(action) {
     try {
         console.log("1> makeLotsData", action);
-        const result = yield call(makeLots, action.product_sn);
+        const result = yield call(makeLots, action.products_sn);
         console.log("3> makeLots result", result);
-        // yield call(lastLoadData)
+        yield put({type:'MAKE_LOT_SUCCESS', data:result.data});
     } catch (e) {
         console.error(e);
-        yield put({type:'LOAD_PRODUCTS_DATA_FAILURE', e});
+        yield put({type:'MAKE_LOT_FAILURE', e});
     }
 }
 function* lastMakeLotsData() {
-    yield takeLatest('MAKE_LOT', makeLotsData)
+    yield takeLatest('MAKE_LOT_REQUEST', makeLotsData)
 }
 
 async function makeAutoLot() {
@@ -66,7 +66,6 @@ async function makeAutoLot() {
                 'accept' : '*/*'
             }
         }
-
     );
 }
 function* makeAutoLotData(action) {

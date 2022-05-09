@@ -93,8 +93,7 @@ function* maunalLotData1(action) {
     try {
         console.log('1> request action:', action)
         const result = yield call(maunalLotData2);
-        console.log('3> result:', result)
-        console.log('4> result of result:', result.data)
+        console.log('3> result:', result.data)
         yield put({type:'MANUAL_LOT_UP_SUCCESS', data:result.data});
     } catch (e) {
         console.error(e);
@@ -105,71 +104,11 @@ function* maunalLotData() {
     yield takeLatest('MANUAL_LOT_UP', maunalLotData1);
 };
 
-async function averageLotData2() {
-    console.log("2> averageLotData1 axios:")
-    return await axios({
-        method: "GET",
-        url: `http://34.64.172.190:9090/v1/lot/makeup-product`,
-        headers: {
-            'Access-Control-Allow-Origin': '*',
-            'Content-Type': 'multipart/form-data;charset=UTF-8'
-        } 
-    });
-}
-
-function* averageLotData1(action) {
-    try {
-        console.log('1> averageLotData1 request action:', action)
-        const result = yield call(averageLotData2);
-        console.log('3> averageLotData1:', result)
-        console.log('4> averageLotData1:', result.data)
-        yield put({type:'AVERGE_LOT_SUCCESS', data:result.data});
-    } catch (e) {
-        console.error(e);
-        yield put({type:'AVERGE_LOT_FAILURE', e});
-    }
-};
-
-function* averageLotData() {
-    yield takeLatest('AVERGE_LOT_REQUEST', averageLotData1);
-};
-
-async function dispatchNumData2() {
-    console.log("2> axios:")
-    return await axios({
-        method: "GET",
-        url: `http://34.64.172.190:9090/v2/bid/find-wait-dispatch`,
-        headers: {
-            'Access-Control-Allow-Origin': '*',
-            'Content-Type': 'multipart/form-data;charset=UTF-8'
-        } 
-    });
-}
-
-function* dispatchNumData1(action) {
-    try {
-        console.log('1> request action:', action)
-        const result = yield call(dispatchNumData2);
-        console.log('3> result:', result)
-        console.log('4> result of result:', result.data)
-        yield put({type:'DISPATCH_NUM_SUCCESS', data:result.data});
-    } catch (e) {
-        console.error(e);
-        yield put({type:'DISPATCH_NUM_FAILURE', e});
-    }
-};
-
-function* dispatchNumData() {
-    yield takeLatest('DISPATCH_NUM_REQUEST', dispatchNumData1);
-};
-
 export default function* loadDashboard() {
     yield all ([
         fork(lastLoadProgressStatus),
         fork(lastLoadPerformance),
         fork(autoLotData),
-        fork(maunalLotData),
-        fork(averageLotData),
-        fork(dispatchNumData)
+        fork(maunalLotData)
     ])
 }

@@ -1,5 +1,4 @@
 import { Avatar, Box, Card, CardContent, Grid, Typography } from '@mui/material';
-import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import SmartToyIcon from '@mui/icons-material/SmartToy';
 import { useSelector } from 'react-redux';
 
@@ -40,8 +39,7 @@ export const AutoLot = (props) => {
               width: 56
             }}
           >
-          <br />
-          <SmartToyIcon />
+            <SmartToyIcon />
           </Avatar>
         </Grid>
       </Grid>

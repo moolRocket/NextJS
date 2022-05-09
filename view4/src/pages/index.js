@@ -10,7 +10,10 @@ import { TotalProfit } from '../components/dashboard/total-profit';
 import { ProgressStatus } from '../components/dashboard/progress-status';
 import { DashboardLayout } from '../components/dashboard-layout';
 
-const Dashboard = () => (
+const Dashboard = ({data}) => {
+  const last = data.data.slice(0,5)
+  console.log("dashboard page", last)
+  return (
   <>
     <Head>
       <title>
@@ -99,13 +102,13 @@ const Dashboard = () => (
             xl={9}
             xs={12}
           >
-            <LatestOrders />
+            <LatestOrders last={last}/>
           </Grid>
         </Grid>
       </Container>
     </Box>
   </>
-);
+)};
 
 Dashboard.getLayout = (page) => (
   <DashboardLayout>
@@ -113,5 +116,15 @@ Dashboard.getLayout = (page) => (
   </DashboardLayout>
 );
 
+export async function getServerSideProps() {
+  const res = await fetch(`http://34.64.172.190:9090/v2/bid/find-success-bid?startDate=2020-01-02&endDate=2022-06-01`)
+  const data = await res.json()
+
+  return {
+    props: {
+      data: data
+    }
+  }
+}
 
 export default Dashboard;

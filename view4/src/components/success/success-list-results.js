@@ -212,20 +212,6 @@ export const SuccessListResults = ({ ...rest }) => {
 
   const { success, bid_sn, successDetails } = useSelector(state => state.success);
   console.log("결과값 success:", success, successDetails, bid_sn);
-  // const [selectedBidSns, setSelectedBidSns] = useState([]);
-
-  // const handleSelectAll = (event) => {
-  //   let newSelectedBidSns;
-
-  //   if (event.target.checked) {
-  //     newSelectedBidSns = success.map((suc) => suc.BID_SN);
-  //   } else {
-  //     newSelectedBidSns = [];
-  //   }
-
-  //   setSelectedBidSns(newSelectedBidSns);
-  // };
-
 
   return (
     <Card {...rest}>

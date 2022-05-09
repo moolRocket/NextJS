@@ -11,10 +11,11 @@ import { SeverityPill } from '../severity-pill';
 import { useSelector } from 'react-redux';
 
 export const LatestOrders = (props) => {
-  
   const { success } = useSelector( state => state.success);
   const succ = success.slice(0,5)
-  console.log("MMM>>", success.slice(0,4));
+  console.log("MMM>>", success.slice(0,4), props.last);
+
+
   return (
   <Card {...props}>
     <CardHeader title="Latest Orders" />
@@ -51,7 +52,7 @@ export const LatestOrders = (props) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {succ.map((suc) => (
+            {succ.length !== 0 ? succ.map((suc) => (
               <TableRow
                 hover
                 key={suc.BID_SN}
@@ -78,6 +79,34 @@ export const LatestOrders = (props) => {
                   </SeverityPill>
                 </TableCell>
               </TableRow>
+            )): props.last.map ((last)=> (
+              <TableRow
+                hover
+                key={last.BID_SN}
+              >
+                <TableCell>
+                  {last.BID_SN}
+                </TableCell>
+                <TableCell>
+                  {last.GUEST_COMPANY_NAME}
+                </TableCell>
+                <TableCell>
+                  {last.SUM_WEIGHT}
+                </TableCell>
+                <TableCell>
+                  {(last.BID_DECIDE_TIME.split(' ')[0])}
+                </TableCell>
+                <TableCell>
+                  <SeverityPill
+                    color={(last.BID_STATUS === '낙찰' && 'success')
+                    || (last.BID_STATUS === 'pending' && 'error')
+                    || 'warning'}
+                  >
+                    {last.BID_STATUS === '낙찰' ? 'success' : 'pending'}
+                  </SeverityPill>
+                </TableCell>
+              </TableRow>
+
             ))}
           </TableBody>
         </Table>

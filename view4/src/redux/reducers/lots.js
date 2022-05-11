@@ -1,4 +1,3 @@
-
 export const initialState = {
     lot_sn: [],
     lots:[],
@@ -20,7 +19,7 @@ const reducer = (state=initialState, action) => {
             console.log("action", action) 
             const lot_sn = action.lot_sn;   
             return {
-                ...state, 
+                ...state,
                 lot_sn
             };
         case LOAD_LOTS_DATA_REQUEST:

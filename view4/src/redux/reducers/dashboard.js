@@ -21,10 +21,10 @@ export const initialState = {
                 { '날짜': '2022-05-08', '금액': 0 }
               ]}},
             
-    autoLotNum:'62',
+    autoLotNum:'55',
     manualLotNum:'21',
     averageNum:'2',
-    waitingForDispatch:'0'
+    waitingForDispatch:'15'
 }
 
 export const LOAD_PROGRESS_STATUS_REQUEST = 'LOAD_PROGRESS_STATUS_REQUEST';
@@ -75,10 +75,12 @@ const reducer = (state = initialState, action) => {
         case AUTO_LOT_UP:
             return {...state};
         case AUTO_LOT_UP_SUCCESS:
+            console.log("**dashboard reducer action", action)
             const autoLotNum = action.data.data;
             return {...state, autoLotNum};
         case AUTO_LOT_UP_FAILURE:
             return {...state};
+
         case MANUAL_LOT_UP:
             return {...state};
         case MANUAL_LOT_UP_SUCCESS:
@@ -90,7 +92,6 @@ const reducer = (state = initialState, action) => {
         case AVERGE_LOT_REQUEST:
             return {...state};
         case AVERGE_LOT_SUCCESS:
-            console.log("에버리지 랏 석세스", action.data.data)
             const averageNum = action.data.data;
             return {...state, averageNum};
         case AVERGE_LOT_FAILURE:

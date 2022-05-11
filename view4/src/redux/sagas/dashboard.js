@@ -56,14 +56,12 @@ function* lastLoadPerformance() {
 
 async function autoLotData2() {
     console.log("2> axios:")
-    return await axios({
-        method: "GET",
-        url: `http://34.64.172.190:9090/v1/lot/auto-create-lot`,
-        headers: {
-            'Access-Control-Allow-Origin': '*',
-            'Content-Type': 'multipart/form-data;charset=UTF-8'
-        } 
-    });
+    return await axios.get(
+        'http://34.64.172.190:9090/v1/lot/auto-create-lot',
+        {
+            header: 'application/json'
+        }
+    )
 }
 function* autoLotData1(action) {
     try {
@@ -89,6 +87,7 @@ async function maunalLotData2() {
         }
     )
 }
+
 function* maunalLotData1(action) {
     try {
         console.log('1> request action:', action)
@@ -101,6 +100,7 @@ function* maunalLotData1(action) {
         yield put({type:'MANUAL_LOT_UP_FAILURE', e});
     }
 };
+
 function* maunalLotData() {
     yield takeLatest('MANUAL_LOT_UP', maunalLotData1);
 };

@@ -44,46 +44,68 @@ export const ProductListToolbar = (props) => {
   console.log("sn", products_sn);
 
   const makeLot = useCallback((products_sn) => {
+    ll(products_sn);
+
+  }, []);
+
+  const ll = async(products_sn)=>{ 
     console.log("products_sn makelot herer", products_sn);
-    dispatch({
+    await dispatch({
       type: 'MAKE_LOT_REQUEST',
       products_sn
     });
 
-    dispatch({
+    await dispatch({
       type: 'MANUAL_LOT_UP'
     });
 
-    dispatch({
+    await dispatch({
       type: 'AVERGE_LOT_REQUEST'
     });
 
-    dispatch({
+    await dispatch({
       type: 'DISPATCH_NUM_REQUEST'
     });
-
-  }, []);
+  }
 
   const makeAutoLot = useCallback(() => {
-    console.log("toolbar auto lit");
-    dispatch({
-      type: 'MAKE_AUTO_LOT'
-    });
+    ll2();
 
-    dispatch({
+  }, []);
+
+  const ll2 = async() => {
+    console.log("toolbar auto lit");
+
+    await dispatch({
+      type: 'MAKE_AUTO_LOT_REQUEST'
+    });
+  }
+
+  const autoLotUp = useCallback(() => {
+    ll3();
+
+  }, []);
+
+  const ll3 = async() => {
+    console.log("toolbar auto lit");
+    
+    await dispatch({
       type: 'AUTO_LOT_UP'
     });
-  }, []);
+  }
 
   // 함수...
   const onClickMakeLot = async () => {
     await makeLot(products_sn);
+    console.log("#함수 사이")
     await searchProducts(start, end);
-
   }
 
   const onClickAutoLot = async () => {
+    console.log("***************>>")
     await makeAutoLot();
+    console.log("#함수 사이")
+    await autoLotUp();
     await searchProducts(start, end);
   }
 

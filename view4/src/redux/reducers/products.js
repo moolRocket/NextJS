@@ -13,7 +13,11 @@ export const MAKE_LOT_REQUEST = "MAKE_LOT_REQUEST";
 export const MAKE_LOT_SUCCESS = "MAKE_LOT_SUCCESS";
 export const MAKE_LOT_FAILURE = "MAKE_LOT_FAILURE";
 
-export const MAKE_AUTO_LOT = "MAKE_AUTO_LOT";
+export const MAKE_AUTO_LOT_REQUEST = "MAKE_AUTO_LOT_REQUEST";
+export const MAKE_AUTO_LOT_SUCCESS = "MAKE_AUTO_LOT_SUCCESS";
+export const MAKE_AUTO_LOT_FAILURE = "MAKE_AUTO_LOT_FAILURE";
+
+
 
 // 리듀서 함수 만들기 
 const reducer = (state=initialState, action) => {
@@ -39,13 +43,18 @@ const reducer = (state=initialState, action) => {
         case MAKE_LOT_SUCCESS:
             state.products_sn = [];
             console.log("reducer products>>",state, products_sn, action);
-
             return { ...state };
         case MAKE_LOT_FAILURE:
             return { ...state };
             
-        case MAKE_AUTO_LOT:
-            return {...state};
+        case MAKE_AUTO_LOT_REQUEST:
+            return { ...state };
+        case MAKE_AUTO_LOT_SUCCESS:
+            console.log("reducer autolot>>",state);
+            return { ...state };
+        case MAKE_AUTO_LOT_FAILURE:
+            return { ...state };
+            
         default:
             return state;
     }

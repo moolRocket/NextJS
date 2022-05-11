@@ -38,7 +38,7 @@ async function makeLots(products_sn) {
                 'Content-Type':'application/json',
                 'accept' : '*/*'
             }
-        } 
+        }
     );
 };
 function* makeLotsData(action) {
@@ -73,14 +73,14 @@ function* makeAutoLotData(action) {
         console.log("1> make autolot", action);
         const result = yield call(makeAutoLot);
         console.log("2> autolot result", result);
-        // yield call(lastMakeAutoLot);
+        yield put({type:'MAKE_AUTO_LOT_SUCCESS'});
     } catch (e) {
         console.error(e);
         yield put ({type:'LOAD_PRODUCTS_DATA_FAILURE', e});
     }
 }
 function* lastMakeAutoLotData() {
-    yield takeLatest('MAKE_AUTO_LOT', makeAutoLotData);
+    yield takeLatest('MAKE_AUTO_LOT_REQUEST', makeAutoLotData);
 }
 
 export default function* loadData() {

@@ -5,6 +5,7 @@ import CountUp from 'react-countup';
 
 export const AutoLot = (props) => {
   const { autoLotNum } = useSelector(state => state.dashboard);
+  console.log("autoLotNum 들어왔니? : ", autoLotNum)
 
   return (
   <Card

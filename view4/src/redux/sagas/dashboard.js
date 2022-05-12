@@ -5,6 +5,7 @@ const local_v2 = "http://192.168.0.251:9090/v2"
 const gcp_v2 = "http://34.64.172.190:9090/v2"
 
 async function progressStatus () {
+    console.log("2> progressStatus");
     return await axios({
         method:"GET",
         url: `${gcp_v2}/bid/find-graph-bid`,
@@ -15,7 +16,9 @@ async function progressStatus () {
 }
 function* loadProgressStatus(action) {
     try {
+        console.log("1> load progress status", action);
         const result = yield call (progressStatus, action);
+        console.log("3> load progress status result", result);
         yield put ({type: 'LOAD_PROGRESS_STATUS_SUCCESS', data: result.data});
     } catch (e) {
         console.error(e);
@@ -27,6 +30,7 @@ function* lastLoadProgressStatus() {
 }
 
 async function performance () {
+    console.log("2> performance");
     return await axios({
         method: "GET",
         url: `${gcp_v2}/bid/find-performance`,
@@ -37,7 +41,9 @@ async function performance () {
 }
 function* loadPerformance (action) {
     try {
+        console.log("1> load performance", action);
         const result = yield call (performance, action);
+        console.log("3> result", result);
         yield put ({type:'LOAD_PERFORMANCE_SUCCESS', data: result.data})
     } catch (e) {
         yield put ({type: 'LOAD_PERFORMANCE_FAILURE', e})
@@ -49,6 +55,7 @@ function* lastLoadPerformance() {
 
 
 async function autoLotData2() {
+    console.log("2> autoLotData2 axios:")
     return await axios.get(
         'http://34.64.172.190:9090/v1/lot/auto-create-lot',
         {
@@ -58,7 +65,9 @@ async function autoLotData2() {
 }
 function* autoLotData1(action) {
     try {
+        console.log('1> autoLot action:', action)
         const result = yield call(autoLotData2);
+        console.log('3> autoLot result:', result.data)
         yield put({type:'AUTO_LOT_UP_SUCCESS', data:result.data});
     } catch (e) {
         console.error(e);
@@ -70,6 +79,7 @@ function* autoLotData() {
 };
 
 async function maunalLotData2() {
+    console.log("2> maunal axios:")
     return await axios.get(
         'http://34.64.172.190:9090/v1/lot/normal-create-lot',
         {
@@ -80,7 +90,9 @@ async function maunalLotData2() {
 
 function* maunalLotData1(action) {
     try {
+        console.log('1> maunal request action:', action)
         const result = yield call(maunalLotData2);
+        console.log('3> maunal result:', result)
         yield put({type:'MANUAL_LOT_UP_SUCCESS', data:result.data});
     } catch (e) {
         console.error(e);
@@ -93,6 +105,7 @@ function* maunalLotData() {
 };
 
 async function averageLotData2() {
+    console.log("2> averageLotData1 axios:")
     return await axios({
         method: "GET",
         url: `http://34.64.172.190:9090/v1/lot/makeup-product`,
@@ -105,7 +118,10 @@ async function averageLotData2() {
 
 function* averageLotData1(action) {
     try {
+        console.log('1> averageLotData1 request action:', action)
         const result = yield call(averageLotData2);
+        console.log('3> averageLotData1:', result)
+        console.log('4> averageLotData1:', result.data)
         yield put({type:'AVERGE_LOT_SUCCESS', data:result.data});
     } catch (e) {
         console.error(e);
@@ -118,6 +134,7 @@ function* averageLotData() {
 };
 
 async function dispatchNumData2() {
+    console.log("2> dispatch axios:")
     return await axios({
         method: "GET",
         url: `http://34.64.172.190:9090/v2/bid/find-wait-dispatch`,
@@ -130,7 +147,9 @@ async function dispatchNumData2() {
 
 function* dispatchNumData1(action) {
     try {
+        console.log('1> dispatch request action:', action)
         const result = yield call(dispatchNumData2);
+        console.log('3> dispatch result:', result)
         yield put({type:'DISPATCH_NUM_SUCCESS', data:result.data});
     } catch (e) {
         console.error(e);

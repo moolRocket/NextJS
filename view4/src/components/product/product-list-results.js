@@ -45,7 +45,6 @@ export const ProductListResults = ({ ...rest }) => {
       type: 'PRODUCT_SN_CHANGE',
       products_sn: products_sn
     })
-    console.log("result sn",setSelectedProductsSns)
   };
 
   return (

@@ -70,25 +70,17 @@ export const ProductListToolbar = (props) => {
 
   const makeAutoLot = useCallback(() => {
     ll2();
-
   }, []);
 
   const ll2 = async() => {
-    console.log("toolbar auto lit");
+    console.log("ll2 toolbar auto lit");
 
     await dispatch({
       type: 'MAKE_AUTO_LOT_REQUEST'
     });
   }
 
-  const autoLotUp = useCallback(() => {
-    ll3();
-
-  }, []);
-
-  const ll3 = async() => {
-    console.log("toolbar auto lit");
-    
+  const autolotup = async() => {
     await dispatch({
       type: 'AUTO_LOT_UP'
     });
@@ -101,9 +93,12 @@ export const ProductListToolbar = (props) => {
   }
 
   const onClickAutoLot = async () => {
+    console.log("**********************>>")
     await makeAutoLot();
-    await searchProducts(start, end);
-    await autoLotUp();
+    await setTimeout(() => {
+      autolotup();
+      searchProducts(start, end);
+    }, 1000)
   }
 
   return (

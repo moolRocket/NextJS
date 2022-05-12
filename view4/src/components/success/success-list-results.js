@@ -211,7 +211,6 @@ function Row(props) {
 export const SuccessListResults = ({ ...rest }) => {
 
   const { success, bid_sn, successDetails } = useSelector(state => state.success);
-  console.log("결과값 success:", success, successDetails, bid_sn);
 
   return (
     <Card {...rest}>

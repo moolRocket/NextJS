@@ -16,8 +16,7 @@ export const LOAD_SUCCESS_DETAIL_FAILURE = "LOAD_SUCCESS_DETAIL_FAILURE";
 // 리듀서 함수 만들기 
 const reducer = (state=initialState, action) => {
     switch (action.type) {
-        case BID_SN_CHANGE:  
-            console.log("action", action) 
+        case BID_SN_CHANGE:
             const bid_sn = action.bid_sn;   
             return {
                 ...state, 
@@ -26,7 +25,6 @@ const reducer = (state=initialState, action) => {
         case LOAD_SUCCESS_DATA_REQUEST:
             return {...state};
         case LOAD_SUCCESS_DATA_SUCCESS:
-            console.log(action.data.data);
             const success = action.data.data;
             return {...state, success};
         case LOAD_SUCCESS_DATA_FAILURE:
@@ -35,7 +33,6 @@ const reducer = (state=initialState, action) => {
         case LOAD_SUCCESS_DETAIL_REQUEST:
             return {...state};
         case LOAD_SUCCESS_DETAIL_SUCCESS:
-            console.log("@@@@",action.data.data)
             const successDetails = action.data.data;
             return {...state, successDetails};
         case LOAD_SUCCESS_DETAIL_FAILURE:

@@ -97,16 +97,13 @@ export const ProductListToolbar = (props) => {
   // 함수...
   const onClickMakeLot = async () => {
     await makeLot(products_sn);
-    console.log("#함수 사이")
     await searchProducts(start, end);
   }
 
   const onClickAutoLot = async () => {
-    console.log("***************>>")
     await makeAutoLot();
-    console.log("#함수 사이")
-    await autoLotUp();
     await searchProducts(start, end);
+    await autoLotUp();
   }
 
   return (

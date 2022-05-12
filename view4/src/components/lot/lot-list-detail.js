@@ -14,8 +14,6 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
 export const LotListDetail = (props) => {
   const { lotDetail } = props;
-  console.log("@@++==")
-
   return (
     <>
       <TableRow

@@ -11,7 +11,6 @@ import { useSelector, useDispatch } from 'react-redux';
 export const ProductListResults = ({ ...rest }) => {
   const dispatch = useDispatch();
   const { products, products_sn } = useSelector(state => state.products);
-  console.log("results", products, products_sn)
   const [selectedProductsSns, setSelectedProductsSns] = useState([]);
 
   const handleSelectAll = (event) => {
@@ -22,7 +21,6 @@ export const ProductListResults = ({ ...rest }) => {
       products_sn = [];
     }
     setSelectedProductsSns(products_sn);
-    console.log("all", products_sn)
   };
 
   const handleSelectOne = (PRODUCT_SN) => {

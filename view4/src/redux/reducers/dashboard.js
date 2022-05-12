@@ -54,10 +54,8 @@ export const DISPATCH_NUM_FAILURE = "DISPATCH_NUM_FAILURE";
 const reducer = (state = initialState, action) => {
     switch(action.type) {
         case LOAD_PROGRESS_STATUS_REQUEST:
-            console.log("여기임> dashboard reducer==")
             return {...state};
         case LOAD_PROGRESS_STATUS_SUCCESS:
-            console.log("여기임> dashboard reducer", action)
             const progressStatus = action.data;
             return {...state, progressStatus}
         case LOAD_PROGRESS_STATUS_FAILURE:
@@ -75,7 +73,6 @@ const reducer = (state = initialState, action) => {
         case AUTO_LOT_UP:
             return {...state};
         case AUTO_LOT_UP_SUCCESS:
-            console.log("**dashboard reducer action", action)
             const autoLotNum = action.data.data;
             return {...state, autoLotNum};
         case AUTO_LOT_UP_FAILURE:

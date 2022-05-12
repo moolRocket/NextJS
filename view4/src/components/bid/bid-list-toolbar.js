@@ -19,7 +19,6 @@ export const BidListToolbar = (props) => {
     month = month >= 10 ? month : '0' + month;
     var day = date.getDate();
     day = day >= 10 ? day : '0' + day;
-    console.log("BBBBB>>>", year + '-' + month + '-' + day)
 
     return year + '-' + month + '-' + day;
   }

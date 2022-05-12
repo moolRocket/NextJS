@@ -24,7 +24,6 @@ function FormattedInputs(props) {
   const [newprice, setPrice] = useState(oldPrice);
   
   const handleChange = (event) => {
-    console.log("@@##",event.target.value );
     setPrice( event.target.value );
     dispatch({
       type: 'PRICE_CHANGE',

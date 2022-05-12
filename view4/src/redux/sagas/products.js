@@ -5,7 +5,6 @@ const local_v1 = "http://192.168.0.251:9090/v1"
 const gcp_v1 = "http://34.64.172.190:9090/v1"
 
 async function productsData(params) {
-    console.log("2> params: ", params)
     return await axios.get(
         `${gcp_v1}/product?startDate=${params.startDate}&endDate=${params.endDate}`,
         {
@@ -15,9 +14,7 @@ async function productsData(params) {
 }
 function* loadProductsData(action) {
     try {
-        console.log("1> request LOAD action: ", action)
         const result = yield call(productsData, action.params);
-        console.log("3> result: ", result)
         yield put({type:'LOAD_PRODUCTS_DATA_SUCCESS', data:result.data});
     } catch (e) {
         console.error(e);
@@ -29,7 +26,6 @@ function* lastLoadData() {
 };
 
 async function makeLots(products_sn) {
-    console.log("2> makeLots products_sn", {"product_list": products_sn});
     return await axios.post(
         `${gcp_v1}/lot`,
         {"product_list": products_sn},
@@ -43,9 +39,7 @@ async function makeLots(products_sn) {
 };
 function* makeLotsData(action) {
     try {
-        console.log("1> makeLotsData", action);
         const result = yield call(makeLots, action.products_sn);
-        console.log("3> makeLots result", result);
         yield put({type:'MAKE_LOT_SUCCESS', data:result.data});
     } catch (e) {
         console.error(e);
@@ -57,7 +51,6 @@ function* lastMakeLotsData() {
 }
 
 async function makeAutoLot() {
-    console.log("2> make auto lot saga");
     return await axios.post (
         `${gcp_v1}/lot/auto-create-lot`,
         {
@@ -70,9 +63,7 @@ async function makeAutoLot() {
 }
 function* makeAutoLotData(action) {
     try {
-        console.log("1> make autolot", action);
         const result = yield call(makeAutoLot);
-        console.log("2> autolot result", result);
         yield put({type:'MAKE_AUTO_LOT_SUCCESS'});
     } catch (e) {
         console.error(e);

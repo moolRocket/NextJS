@@ -16,7 +16,6 @@ export const LOAD_LOTS_DETAIL_FAILURE = "LOAD_LOTS_DETAIL_FAILURE";
 const reducer = (state=initialState, action) => {
     switch (action.type) {
         case LOT_SN_CHANGE:  
-            console.log("action", action) 
             const lot_sn = action.lot_sn;   
             return {
                 ...state,
@@ -25,7 +24,6 @@ const reducer = (state=initialState, action) => {
         case LOAD_LOTS_DATA_REQUEST:
             return {...state};
         case LOAD_LOTS_DATA_SUCCESS:
-            console.log(action.data.data);
             const lots = action.data.data;
             return {...state, lots};
         case LOAD_LOTS_DATA_FAILURE:
@@ -34,7 +32,6 @@ const reducer = (state=initialState, action) => {
         case LOAD_LOTS_DETAIL_REQUEST:
             return {...state};
         case LOAD_LOTS_DETAIL_SUCCESS:
-            console.log("@@@@",action.data.data)
             const lotDetails = action.data.data;
             return {...state, lotDetails};
         case LOAD_LOTS_DATA_FAILURE:

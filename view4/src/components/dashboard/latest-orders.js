@@ -13,7 +13,6 @@ import { useSelector } from 'react-redux';
 export const LatestOrders = (props) => {
   const { success } = useSelector( state => state.success);
   const succ = success.slice(0,5)
-  console.log("MMM>>", success.slice(0,4), props.last);
 
 
   return (

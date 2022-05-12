@@ -9,7 +9,6 @@ export const LotTime = (props) => {
   const theme = useTheme();
 
   const { performance } = useSelector(state => state.dashboard)
-  console.log(">>###performance", performance.data.lastweek)
   const [overviewOpen, setOverviewOpen] = useState(false);
   const onClickOverview = () => setOverviewOpen(true);
   const overviewClose = () => setOverviewOpen(false);

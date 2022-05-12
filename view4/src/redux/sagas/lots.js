@@ -5,7 +5,6 @@ const local_v1 = "http://192.168.0.251:9090/v1"
 const gcp_v1 = "http://34.64.172.190:9090/v1"
 
 async function lotsData(params) {
-    console.log("2> params: ",params)
     return await axios({
         method: "GET",
         url: `${gcp_v1}/lot?startDate=${params.startDate}&endDate=${params.endDate}&iscancel=0`,
@@ -17,10 +16,8 @@ async function lotsData(params) {
 }
 function* loadLotsData(action) {
     try {
-        console.log("1> request action:",action)
         const result = yield call(lotsData, action.params);
         // const result2 = yield call(lotsTimeData);
-        console.log("3> result:", result)
         yield put({type:'LOAD_LOTS_DATA_SUCCESS', data:result.data});
     } catch (e) {
         console.error(e);
@@ -32,7 +29,6 @@ function* lastLoadData() {
 };
 
 async function lotDetailsData(lot_sn_one) {
-    console.log("2> params:", lot_sn_one)
     return await axios({
         method: "GET",
         url: `${gcp_v1}/lot/dtl?lot_sn=${lot_sn_one}`,
@@ -44,9 +40,7 @@ async function lotDetailsData(lot_sn_one) {
 }
 function* loadLotDetailsData(action) {
     try{
-        console.log("1>request detail action", action);
         const result = yield call(lotDetailsData, action.lot_sn_one);
-        console.log("detail result", result);
         yield put({type: 'LOAD_LOTS_DETAIL_SUCCESS', data: result.data})
     } catch (e) {
         console.error(e);

@@ -12,7 +12,6 @@ import { DashboardLayout } from '../components/dashboard-layout';
 
 const Dashboard = ({data}) => {
   const last = data.data.slice(0,5)
-  console.log("dashboard page", last)
   return (
   <>
     <Head>

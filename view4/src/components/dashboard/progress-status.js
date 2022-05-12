@@ -8,7 +8,6 @@ import { useSelector } from 'react-redux';
 export const ProgressStatus = (props) => {
   const theme = useTheme();
   const { progressStatus } = useSelector(state => state.dashboard);
-  console.log("****&&", progressStatus)
   
   const wait = progressStatus.data[0].COUNT;
   const ing = progressStatus.data[1].COUNT;

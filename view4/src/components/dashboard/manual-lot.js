@@ -6,7 +6,6 @@ import CountUp from 'react-countup';
 
 export const ManualLot = (props) => {
   const { manualLotNum } = useSelector(state => state.dashboard);
-  console.log("manualLotNum 들어왔니? : ", manualLotNum)
 
   return (
   <Card {...props}>

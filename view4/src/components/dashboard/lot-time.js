@@ -115,7 +115,7 @@ export const LotTime = (props) => {
         //     Last 1 days
         //   </Button>
         // )}
-        title="LOT Organization time"
+        title="Price Status"
       />
       <Divider />
       <CardContent>

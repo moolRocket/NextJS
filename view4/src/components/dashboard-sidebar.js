@@ -12,16 +12,19 @@ import { NavItem } from './nav-item';
 import { TruckIcon } from '../icons/truck'
 import AutoAwesomeMotionIcon from '@mui/icons-material/AutoAwesomeMotion';
 import AssignmentTurnedInIcon from '@mui/icons-material/AssignmentTurnedIn';
+import ContentPasteSearchIcon from '@mui/icons-material/ContentPasteSearch';
+import BarChartIcon from '@mui/icons-material/BarChart';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 const items = [
   {
     href: '/',
-    icon: (<ChartBarIcon fontSize="small" />),
+    icon: (<BarChartIcon fontSize="small" />),
     title: 'dashboard'
   },
   {
     href: '/products',
-    icon: (<UsersIcon fontSize="small" />),
+    icon: (<ContentPasteSearchIcon fontSize="small" />),
     title: '입찰대상관리'
   },
   {
@@ -31,12 +34,12 @@ const items = [
   },
   {
     href: '/bids',
-    icon: (<ShoppingBagIcon fontSize="small" />),
+    icon: (<AssignmentTurnedInIcon fontSize="small" />),
     title: '입찰대상확정'
   },
   {
     href: '/success',
-    icon: (<AssignmentTurnedInIcon fontSize="small" />),
+    icon: (<ShoppingCartIcon fontSize="small" />),
     title: '낙찰결과관리'
   }
 ];

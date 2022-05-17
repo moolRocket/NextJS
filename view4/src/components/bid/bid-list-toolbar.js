@@ -7,6 +7,7 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { useDispatch } from 'react-redux';
+import { LotAccordion } from '../dashboard/lot-accordion';
 
 export const BidListToolbar = (props) => {
   const dispatch = useDispatch();
@@ -48,6 +49,9 @@ export const BidListToolbar = (props) => {
 
   return (
     <Box {...props}>
+      <Box>
+        <LotAccordion />
+      </Box>
       <Box sx={{ mt: 3 }}>
         <Card>
           <CardContent>

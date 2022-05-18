@@ -116,6 +116,7 @@ export const LotTime = (props) => {
         //   </Button>
         // )}
         title="Price Status"
+        
       />
       <Divider />
       <CardContent>

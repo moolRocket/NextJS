@@ -88,31 +88,6 @@ export const SuccessListToolbar = (props) => {
     await findPerformance();
   }
 
-  const hstyle = {
-    color: "black",
-    backgroundColor: "blue",
-    fontFamily: "Arial"
-  }
-
-  
-
-  const mainBody ={
-    backgroundColor: "white",
-    color: "red",
-    margin: "10px",
-    fontFamily: "Arial",
-    textAlign: "center"
-  }
-
-  const style = {
- 
-    backgroundColor : 'red',
-    border: '1px solid black',
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center"
-  }
-
   return (
     
     <Box {...props}>

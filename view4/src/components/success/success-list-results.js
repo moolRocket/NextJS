@@ -51,13 +51,13 @@ function Row(props) {
           </IconButton>
         </TableCell>
         <TableCell>
+          {suc.BID_SN}
+        </TableCell>
+        <TableCell>
           {((suc.BID_START_TIME.split(' '))[0])}
         </TableCell>
         <TableCell>
           {((suc.BID_END_TIME.split(' '))[0])}
-        </TableCell>
-        <TableCell>
-          {suc.BID_SN}
         </TableCell>
         <TableCell>
           {suc.SUM_WEIGHT}
@@ -187,13 +187,13 @@ export const SuccessListResults = ({ ...rest }) => {
               <TableRow>
                 <TableCell />
                 <TableCell>
+                  입찰번호
+                </TableCell>
+                <TableCell>
                   입찰시작일
                 </TableCell>
                 <TableCell>
                   입찰종료일
-                </TableCell>
-                <TableCell>
-                  입찰번호
                 </TableCell>
                 <TableCell>
                   총 중량

@@ -9,6 +9,13 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { useDispatch, useSelector } from 'react-redux';
 import { SuccessAccordion } from '../dashboard/success-accordion';
+import styled from '@emotion/styled';
+import { Form } from 'formik';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
+import FormLabel from '@mui/material/FormLabel';
 
 export const SuccessListToolbar = (props) => {
   const dispatch = useDispatch();
@@ -81,7 +88,33 @@ export const SuccessListToolbar = (props) => {
     await findPerformance();
   }
 
+  const hstyle = {
+    color: "black",
+    backgroundColor: "blue",
+    fontFamily: "Arial"
+  }
+
+  
+
+  const mainBody ={
+    backgroundColor: "white",
+    color: "red",
+    margin: "10px",
+    fontFamily: "Arial",
+    textAlign: "center"
+  }
+
+  const style = {
+ 
+    backgroundColor : 'red',
+    border: '1px solid black',
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center"
+  }
+
   return (
+    
     <Box {...props}>
       <Box>
         <SuccessAccordion />
@@ -96,28 +129,21 @@ export const SuccessListToolbar = (props) => {
               }}>
               <Box sx={{ padding: 2 }}>
                 <LocalizationProvider dateAdapter={AdapterDateFns}>
-                <label>
-                  <input 
-                    type="radio"
-                    value={inputStatus}
-                    checked={inputStatus === "bidding"}
-                    onChange={() => 
-                      handleClickRadioButton("bidding")
-                    }
-                  />
-                  입찰진행중
-                </label>
-                <label>
-                <input 
-                    type="radio"
-                    value={inputStatus}
-                    checked={inputStatus === "suc_bid"}
-                    onChange={() => 
-                      handleClickRadioButton("suc_bid")
-                    }
-                  />
-                  낙찰
-                </label>
+                <FormControl>
+                  <RadioGroup
+                    row
+                    aria-labelledby="demo-radio-buttons-group-label"
+                    defaultValue="진행중"
+                    name="radio-buttons-group"
+                  >
+                    <FormControlLabel value={inputStatus} checked={inputStatus === "bidding"} control={<Radio />} label="입찰 진행중" onChange={() => 
+                                  handleClickRadioButton("bidding")
+                                }/>
+                    <FormControlLabel value={inputStatus} checked={inputStatus === "suc_bid"} control={<Radio />} label="낙찰" onChange={() => 
+                                  handleClickRadioButton("suc_bid")
+                                }/>
+                  </RadioGroup>
+                </FormControl>
                   <DatePicker
                     label="start"
                     inputFormat='yyyy-MM-dd'

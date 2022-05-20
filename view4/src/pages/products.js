@@ -4,7 +4,7 @@ import { DashboardLayout } from '../components/dashboard-layout';
 import { ProductListResults } from '../components/product/product-list-results';
 import { ProductListToolbar } from '../components/product/product-list-toolbar';
 
-const Products = () => (
+const Products = () =>  (
   <>
     <Head>
       <title>

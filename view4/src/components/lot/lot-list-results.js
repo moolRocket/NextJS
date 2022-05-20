@@ -1,18 +1,17 @@
 import React, { useState } from 'react';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import {
-  Box, Card, Collapse,
+  Box,  Card, Checkbox, Collapse,
   Table, TableBody, TableCell, TableHead,
-  TableRow, Typography, IconButton
+  TableRow, TextField, Typography, IconButton
 } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import { LotListDetail } from './lot-list-detail';
 
 function Row(props) {
   const dispatch = useDispatch();
-  const { lot, lotDetails } = props;
+  const { lot, lot_sn, lotDetails } = props;
   const [open, setOpen] = useState([false, 0]);
 
   const searchLotDetails = (LOT_SN) => {
@@ -21,9 +20,15 @@ function Row(props) {
       lot_sn_one: LOT_SN
     })
   }
+
   const onClickDetails = async (LOT_SN) => {
     searchLotDetails(LOT_SN);
     setOpen([!open[0], LOT_SN]);
+
+    dispatch({
+      type: 'LOT_SN_CHANGE',
+      lot_sn: LOT_SN
+    })
   }
   return (
     <>
@@ -32,23 +37,17 @@ function Row(props) {
           <TableRow
             hover
             key={lot.LOT_SN}
-            // selected={selectedLotsSns.indexOf(lot.LOT_SN) !== -1}
           >
-            {/* <TableCell padding="checkbox">
-              <Checkbox
-                checked={selectedLotsSns.indexOf(lot.LOT_SN) !== -1}
-                onChange={() => handleSelectOne(lot.LOT_SN)}
-                value="true"
-              />
-            </TableCell> */}
             <TableCell>
               <IconButton
                 aria-label="expand row"
                 size="big"
                 onClick={() => onClickDetails(lot.LOT_SN)}
               >
-                {open[0] && open[1] === lot.LOT_SN
-                  ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+                {open[0] && (open[1] === lot.LOT_SN) && (open[1] === lot_sn) ?
+                  <KeyboardArrowUpIcon /> : 
+                  <KeyboardArrowDownIcon />
+                }
               </IconButton>
             </TableCell>
             <TableCell>
@@ -82,8 +81,8 @@ function Row(props) {
           <>
             <TableRow>
               <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={12}>
-                <Collapse in={open[0]} timeout="auto" unmountOnExit>
-                  <Box sx={{ margin: 1,  maxWidth:2000 }}>
+                <Collapse  in={open[0] &&(lot.LOT_SN === lot_sn) ? true : false} timeout="auto" unmountOnExit>
+                  <Box sx={{ margin: 1, maxWidth: 2000 }}>
                     <Typography variant='h6' gutterBottom component="div">
                       DETAIL
                     </Typography>
@@ -102,30 +101,48 @@ function Row(props) {
                           <TableCell>
                             출발지
                           </TableCell>
-                          {/* <TableCell>
-                        출발지 상세주소
-                      </TableCell> */}
                           <TableCell>
                             목적지
                           </TableCell>
-                          {/* <TableCell>
-                        목적지 상세주소
-                      </TableCell> */}
                           <TableCell>
                             상품편성일시
                           </TableCell>
                           <TableCell>
                             취소
                           </TableCell>
-                          <TableCell>
-                            취소내용
-                          </TableCell>
                         </TableRow>
                       </TableHead>
                       <TableBody>
-                      {lotDetails.map((lotDetail) => (
-                        <LotListDetail key={lotDetail.PRODUCT_SN} lotDetail={lotDetail} />
-                      ))}
+                        {lotDetails.map((lotDetail) => (
+                          <>
+                            <TableRow
+                              hover
+                              key={lotDetail.PRODUCT_SN}
+                            >
+                              <TableCell>
+                                {lotDetail.PRODUCT_SN}
+                              </TableCell>
+                              <TableCell>
+                                {lotDetail.PRODUCT_WEIGHT}
+                              </TableCell>
+                              <TableCell>
+                                {lotDetail.GUEST_COMPANY_NAME}
+                              </TableCell>
+                              <TableCell>
+                                {lotDetail.START_CITY_NAME}
+                              </TableCell>
+                              <TableCell>
+                                {lotDetail.DESTINATION_CITY_NAME}
+                              </TableCell>
+                              <TableCell>
+                                {(lotDetail.PRODUCT_REGDATE).split('T')[0]}
+                              </TableCell>
+                              <TableCell>
+                                {lotDetail.LOT_ISCANCEL === 0 ? "Yes" : "No"}
+                              </TableCell>
+                            </TableRow>
+                          </>
+                        ))}
                       </TableBody>
                     </Table>
                   </Box>
@@ -142,7 +159,6 @@ function Row(props) {
 
 export const LotListResults = ({ ...rest }) => {
   const { lots, lot_sn, lotDetails } = useSelector(state => state.lots);
-  console.log("lots: ", lots, lot_sn, lotDetails);
 
   return (
     <Card {...rest}>
@@ -183,7 +199,7 @@ export const LotListResults = ({ ...rest }) => {
             </TableHead>
             <TableBody>
               {lots.map((lot) => (
-                <Row key={lot.LOT_SN} lot={lot} lotDetails={lotDetails} />
+                <Row key={lot.LOT_SN} lot={lot} lotDetails={lotDetails} lot_sn={lot_sn}/>
               ))}
             </TableBody>
           </Table>

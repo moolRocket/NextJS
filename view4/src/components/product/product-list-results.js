@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import {
   Box, Card, Checkbox,
@@ -11,10 +11,12 @@ import { useSelector, useDispatch } from 'react-redux';
 export const ProductListResults = ({ ...rest }) => {
   const dispatch = useDispatch();
   const { products, products_sn } = useSelector(state => state.products);
+  
   const [selectedProductsSns, setSelectedProductsSns] = useState([]);
 
   const handleSelectAll = (event) => {
     let products_sn;
+    console.log("~~~~", event)
     if (event.target.checked) {
       products_sn = products.map((product) => product.PRODUCT_SN);
     } else {
@@ -26,6 +28,8 @@ export const ProductListResults = ({ ...rest }) => {
   const handleSelectOne = (PRODUCT_SN) => {
     const selectedIndex = selectedProductsSns.indexOf(PRODUCT_SN);
     let products_sn = [];
+    
+    console.log("~~~~!!", selectedIndex)
 
     if (selectedIndex === -1) {
       products_sn = products_sn.concat(selectedProductsSns, PRODUCT_SN);
@@ -156,8 +160,3 @@ export const ProductListResults = ({ ...rest }) => {
     </Card>
   );
 };
-
-// ProductListResults.propTypes = {
-//   products: PropTypes.array.isRequired
-// };
-

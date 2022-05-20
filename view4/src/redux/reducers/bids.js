@@ -1,5 +1,5 @@
 export const initialState = {
-    bid_sn: [],
+    bid_sn: 0,
     bids:[],
     bidDetails: [],
     price: '',

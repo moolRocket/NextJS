@@ -14,7 +14,7 @@ export const LOAD_BIDDING_DATA_REQUEST = "LOAD_BIDDING_DATA_REQUEST";
 export const LOAD_BIDDING_DATA_SUCCESS = "LOAD_BIDDING_DATA_SUCCESS";
 export const LOAD_BIDDING_DATA_FAILURE = "LOAD_BIDDING_DATA_FAILURE";
 
-export const BID_SN_CHANGE = "BID_SN_CHANGE";
+export const SUCBID_SN_CHANGE = "SUCBID_SN_CHANGE";
 export const INPUT_STATUS_REQUEST = "INPUT_STATUS_REQUEST";
 
 export const LOAD_SUCCESS_DETAIL_REQUEST = "LOAD_SUCCESS_DETAIL_REQUEST";
@@ -24,7 +24,7 @@ export const LOAD_SUCCESS_DETAIL_FAILURE = "LOAD_SUCCESS_DETAIL_FAILURE";
 // 리듀서 함수 만들기 
 const reducer = (state=initialState, action) => {
     switch (action.type) {
-        case BID_SN_CHANGE:
+        case SUCBID_SN_CHANGE:
             const bid_sn = action.bid_sn;   
             return {
                 ...state, 
@@ -37,6 +37,7 @@ const reducer = (state=initialState, action) => {
                 ...state, 
                 inputStatus
             };
+            
         case LOAD_SUCCESS_DATA_REQUEST:
             return {...state};
         case LOAD_SUCCESS_DATA_SUCCESS:

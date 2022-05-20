@@ -6,8 +6,6 @@ import lots from './lots';
 import bids from './bids';
 import dashboard from './dashboard';
 
-// getInitialProps 등에서 리덕스 스토어에 접근하려면 hydrate 필요
-// api (axios) 사용하면 필요 없나?
 const rootReducer = combineReducers({
     index: (state={}, action) => {
         switch (action.type) {

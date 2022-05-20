@@ -39,8 +39,8 @@ const reducer = (state=initialState, action) => {
         case MAKE_LOT_REQUEST:
             return { ...state };
         case MAKE_LOT_SUCCESS:
-            state.products_sn = [];
-            return { ...state };
+            // state.products_sn = [];
+            return { ...state, products_sn:[]  };
         case MAKE_LOT_FAILURE:
             return { ...state };
             

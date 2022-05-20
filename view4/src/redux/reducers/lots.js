@@ -1,5 +1,5 @@
 export const initialState = {
-    lot_sn: [],
+    lot_sn: 0,
     lots:[],
     lotDetails: []
 }

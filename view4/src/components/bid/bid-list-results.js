@@ -1,7 +1,5 @@
 import React, { useCallback, useState } from 'react';
 import PerfectScrollbar from 'react-perfect-scrollbar';
-import PropTypes from 'prop-types';
-import { format } from 'date-fns';
 import {
   Box, Button, Card, Checkbox, Collapse,
   Table, TableBody, TableCell,
@@ -14,7 +12,6 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import NumberFormat from 'react-number-format';
 
 
 function FormattedInputs(props) {
@@ -43,7 +40,7 @@ function FormattedInputs(props) {
 
 function Row(props) {
   const dispatch = useDispatch();
-  const { bid, bidDetails, price, bcp_sn, regDate, search_date } = props;
+  const { bid, bidDetails, price, bid_sn, bcp_sn, regDate, search_date } = props;
   const [open, setOpen] = useState([false, 0]);
   const start = search_date.startDate;
   const end = search_date.endDate;
@@ -75,9 +72,12 @@ function Row(props) {
   const onClickDetails = async (BID_SN) => {
     searchBidDetails(BID_SN);
     setOpen([!open[0], BID_SN]);
+    dispatch({
+      type: 'BID_SN_CHANGE',
+      bid_sn: BID_SN
+    })
   }
   const changePrice = async (price, bcp_sn) => {
-    console.log("~~~**", price, bcp_sn);
     dispatch({
       type: 'LOAD_CHANGE_PRICE_REQUEST',
       params: {
@@ -90,7 +90,6 @@ function Row(props) {
   const makeSuccess = async (BID_SN, bidStartDate, bidEndDate) => {
     const updateStartDate = getFormatDate(bidStartDate);
     const updateEndDate = getFormatDate(bidEndDate);
-    console.log("0> makeSuccess", BID_SN)
     dispatch({
       type:'MAKE_SUCCESS_DATA_REQUEST',
       params: {
@@ -101,8 +100,6 @@ function Row(props) {
     })
   }
   const searchBids = useCallback((start, end)=>{
-    console.log("0> searchBids on result",start, end)
-
     dispatch({ 
       type: 'LOAD_BIDS_DATA_REQUEST', 
       params: {
@@ -130,7 +127,7 @@ function Row(props) {
             size="big"
             onClick={() => onClickDetails(bid.BID_SN)}
           >
-            {open[0] && open[1] === bid.BID_SN
+            {open[0] && (open[1] === bid.BID_SN) && (open[1] === bid_sn)
               ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
         </TableCell>
@@ -196,7 +193,7 @@ function Row(props) {
 
         <TableRow>
           <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={12}>
-            <Collapse in={open[0]} timeout="auto" unmountOnExit>
+            <Collapse in={open[0]&&(bid.BID_SN === bid_sn) ? true : false} timeout="auto" unmountOnExit>
               <Box sx={{ margin: 1 }}>
                 <Typography variant='h6' gutterBottom component="div">
                   DETAIL
@@ -302,7 +299,6 @@ function Row(props) {
 
 export const BidListResults = ({ ...rest }) => {
   const { bids, bid_sn, bidDetails, price, bcp_sn, search_date } = useSelector(state => state.bids);
-  console.log("bids:", bids, bid_sn, bidDetails, price, bcp_sn, search_date);
 
 
   return (
@@ -350,7 +346,7 @@ export const BidListResults = ({ ...rest }) => {
             </TableHead>
             <TableBody>
               {bids.map((bid) => (
-                <Row key={bid.BID_SN} bid={bid} bidDetails={bidDetails} price={price} bcp_sn={bcp_sn} 
+                <Row key={bid.BID_SN} bid={bid} bid_sn={bid_sn} bidDetails={bidDetails} price={price} bcp_sn={bcp_sn} 
                 search_date={search_date} regDate={((bid.LOT_REGDATE).split('T'))[0]} />
               ))}
             </TableBody>

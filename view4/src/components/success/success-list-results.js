@@ -1,7 +1,5 @@
-import React, { forwardRef, useState } from 'react';
+import React, { useState } from 'react';
 import PerfectScrollbar from 'react-perfect-scrollbar';
-import PropTypes from 'prop-types';
-import { format } from 'date-fns';
 import {
   Box, Button, Card, Checkbox, Collapse,
   Table, TableBody, TableCell, TableHead,
@@ -11,82 +9,44 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import NumberFormat from 'react-number-format';
 
-const NumberFormatCustom = forwardRef(function NumberFormatCustom(props, ref) {
-  const { onChange, ...other } = props;
-
-  return (
-    <NumberFormat
-      {...other}
-      getInputRef={ref}
-      onValueChange={(values) => {
-        onChange({
-          target: {
-            name: props.name,
-            value: values.value,
-          },
-        });
-      }}
-      thousandSeparator
-      isNumericString
-      prefix="₩"
-    />
-  );
-});
 
 function Row(props) {
   const dispatch = useDispatch();
-  const { suc, successDetails } = props;
+  const { suc, bid_sn, successDetails } = props;
   const [open, setOpen] = useState([false, 0]);
   const [selectedBidSns, setSelectedBidSns] = useState([]);
-  const [number, setNumber] = useState({
-    numberformat: successDetails.map((successDetail) => (
-      successDetail.PRODUCT_UNIT_PRICE
-    ))
-  })
   
-  const numberformatChange = (event) => {
-    setNumber({
-      ...number,
-      [event.target.name]: event.target.value,
-    });
-  };
-
   const searchBidDetails = (BID_SN) => {
     dispatch({
       type: 'LOAD_SUCCESS_DETAIL_REQUEST',
       bid_sn_one: BID_SN
     })
   }
-
   const onClickDetails = async (BID_SN) => {
     searchBidDetails(BID_SN);
     setOpen([!open[0], BID_SN]);
+
+    dispatch({
+      type: 'SUCBID_SN_CHANGE',
+      bid_sn: BID_SN
+    })
   }
-  
+
   return (
     <>
 
       <TableRow
         hover
         key={suc.BID_SN}
-        selected={selectedBidSns.indexOf(suc.BID_SN) !== -1}
       >
-        {/* <TableCell padding="checkbox">
-          <Checkbox
-            checked={selectedBidSns.indexOf(suc.BID_SN) !== -1}
-            onChange={() => handleSelectOne(suc.BID_SN)}
-            value="true"
-          />
-        </TableCell> */}
         <TableCell>
           <IconButton
             aria-label="expand row"
             size="big"
             onClick={() => onClickDetails(suc.BID_SN)}
           >
-            {open[0] && open[1] === suc.BID_SN
+          {open[0] && (open[1] === suc.BID_SN) && (open[1] === bid_sn)
               ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
         </TableCell>
@@ -127,7 +87,8 @@ function Row(props) {
       <>
         <TableRow>
           <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={12}>
-            <Collapse in={open[0]} timeout="auto" unmountOnExit>
+
+          <Collapse in={open[0]&&(suc.BID_SN === bid_sn) ? true : false} timeout="auto" unmountOnExit>
               <Box sx={{ margin: 1 }}>
                 <Typography variant='h6' gutterBottom component="div">
                   DETAIL
@@ -262,9 +223,9 @@ export const SuccessListResults = ({ ...rest }) => {
             </TableHead>
             <TableBody>
               {inputStatus.inputStatus === 'suc_bid' ? success.map((suc) => (
-                <Row key={suc.BID_SN} suc={suc} successDetails={successDetails} />
+                <Row key={suc.BID_SN} bid_sn={bid_sn} suc={suc} successDetails={successDetails} />
               )) : bidding.map((suc) => (
-                <Row key={suc.BID_SN} suc={suc} successDetails={successDetails} />
+                <Row key={suc.BID_SN} bid_sn={bid_sn} suc={suc} successDetails={successDetails} />
               ))}
             </TableBody>
           </Table>

@@ -40,13 +40,13 @@ export const ProductListToolbar = (props) => {
   }, []);
 
   const { products_sn } = useSelector(state => state.products);
-
+  console.log("***", products_sn);
   const makeLot = useCallback((products_sn) => {
     ll(products_sn);
 
   }, []);
 
-  const ll = async(products_sn)=>{
+  const ll = async(products_sn)=>{ 
     await dispatch({
       type: 'MAKE_LOT_REQUEST',
       products_sn
@@ -86,6 +86,7 @@ export const ProductListToolbar = (props) => {
   const onClickMakeLot = async () => {
     await makeLot(products_sn);
     await searchProducts(start, end);
+    
   }
 
   const onClickAutoLot = async () => {
@@ -137,22 +138,6 @@ export const ProductListToolbar = (props) => {
                   />
                 </LocalizationProvider>
               </Box>
-              {/* <FormControl>
-                <FormLabel id="demo-row-radio-buttons-group-label">취소여부</FormLabel>
-                <RadioGroup
-                  row
-                  aria-labelledby="demo-row-radio-buttons-group-label"
-                  name="row-radio-buttons-group"
-                  value={productsOption}
-                  onChange={(event) => {
-                    setProductsOption(event.target.value);
-                  }}
-                >
-                  <FormControlLabel value="All" control={<Radio />} label="All" />
-                  <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
-                  <FormControlLabel value="No" control={<Radio />} label="No" />
-                </RadioGroup>
-              </FormControl>  */}
               <Box sx={{ m: 1, padding: 2 }}>
                 <ButtonGroup variant='contained' aria-label="outlined primary button group">
                   <Button

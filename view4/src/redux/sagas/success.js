@@ -29,6 +29,30 @@ function* lastLoadData2() {
     yield takeLatest('LOAD_SUCCESS_DATA_REQUEST', loadSuccessData);
 };
 
+async function BiddingData(params) {
+    return await axios({
+        method: "GET",
+        url: `${gcp_v2}/bid/find-progress-bid?startDate=${params.startDate}&endDate=${params.endDate}`,
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Content-Type': 'multipart/form-data;charset=UTF-8'
+        } 
+    });
+}
+
+function* loadBiddingData(action) {
+    try {
+        const result = yield call(BiddingData, action.params);
+        yield put({type:'LOAD_BIDDING_DATA_SUCCESS', data:result.data});
+    } catch (e) {
+        console.error(e);
+        yield put({type:'LOAD_BIDDING_DATA_FAILURE', e});
+    }
+};
+
+function* loadBiddingData2() {
+    yield takeLatest('LOAD_BIDDING_DATA_REQUEST', loadBiddingData);
+};
 
 async function successDetailsData(bid_sn_one) {
     return await axios({
@@ -56,6 +80,7 @@ function* lastLoadSuccessDetailData() {
 export default function* loadData2() {
     yield all([
         fork(lastLoadData2),
-        fork(lastLoadSuccessDetailData)
+        fork(lastLoadSuccessDetailData),
+        fork(loadBiddingData2)
     ]);
 };

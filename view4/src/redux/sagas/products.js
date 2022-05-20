@@ -57,7 +57,6 @@ function* lastMakeLotsData() {
 }
 
 async function makeAutoLot() {
-    console.log("2> make auto lot saga");
     return await axios.post (
         `${gcp_v1}/lot/auto-create-lot`,
         {
@@ -70,9 +69,7 @@ async function makeAutoLot() {
 }
 function* makeAutoLotData(action) {
     try {
-        console.log("1> make autolot", action);
         const result = yield call(makeAutoLot);
-        console.log("3> make autolot result", result);
         yield put({type:'MAKE_AUTO_LOT_SUCCESS'});
     } catch (e) {
         console.error(e);

@@ -23,21 +23,46 @@ export const SuccessListToolbar = (props) => {
     return year + '-' + month + '-' + day;
   }
 
-  const searchSuccess1 = useCallback((start, end) => {
+  const [ inputStatus, setInputStatus ] = useState("bidding");
+
+  const handleClickRadioButton = (radioBtnName) => {
+    setInputStatus(radioBtnName)
+  }
+
+  console.log("11111111 inputStatus !!!!!!!!는", inputStatus);
+
+  const searchSuccess1 = useCallback((start, end, inputStatus) => {
     const startDate = getFormatDate(start)
     const endDate = getFormatDate(end)
-    console.log(startDate, endDate)
+    
+    console.log("222222222 inputStatus !!!!!!!!는", inputStatus);
     dispatch({
-      type: 'LOAD_SUCCESS_DATA_REQUEST',
-      params: {
-        startDate,
-        endDate
+      type: 'INPUT_STATUS_REQUEST',
+      inputStatus: {
+        inputStatus
       }
     });
+    if (inputStatus === "suc_bid") {
+      dispatch({
+        type: 'LOAD_SUCCESS_DATA_REQUEST',
+        params: {
+          startDate,
+          endDate
+        }
+      });
+    } else if (inputStatus === "bidding") {
+      dispatch({
+        type: 'LOAD_BIDDING_DATA_REQUEST',
+        params: {
+          startDate,
+          endDate
+        }
+      });
+    }
+    
   }, []);
 
   const searchProgressStatus = () => {
-    console.log("여기임>>")
     dispatch ({
       type: 'LOAD_PROGRESS_STATUS_REQUEST',
       
@@ -45,14 +70,13 @@ export const SuccessListToolbar = (props) => {
   }
 
   const findPerformance = () => {
-    console.log("toolbar performance");
     dispatch ({
       type: 'LOAD_PERFORMANCE_REQUEST',
     })
   }
 
   const searchSuccess = async() => {
-    await searchSuccess1(start, end);
+    await searchSuccess1(start, end, inputStatus);
     await searchProgressStatus();
     await findPerformance();
   }
@@ -72,6 +96,28 @@ export const SuccessListToolbar = (props) => {
               }}>
               <Box sx={{ padding: 2 }}>
                 <LocalizationProvider dateAdapter={AdapterDateFns}>
+                <label>
+                  <input 
+                    type="radio"
+                    value={inputStatus}
+                    checked={inputStatus === "bidding"}
+                    onChange={() => 
+                      handleClickRadioButton("bidding")
+                    }
+                  />
+                  입찰진행중
+                </label>
+                <label>
+                <input 
+                    type="radio"
+                    value={inputStatus}
+                    checked={inputStatus === "suc_bid"}
+                    onChange={() => 
+                      handleClickRadioButton("suc_bid")
+                    }
+                  />
+                  낙찰
+                </label>
                   <DatePicker
                     label="start"
                     inputFormat='yyyy-MM-dd'
@@ -100,7 +146,7 @@ export const SuccessListToolbar = (props) => {
               </Box>
               <Box sx={{ m: 1, padding: 2 }}>
                 <Button
-                  onClick={() => searchSuccess(start, end)}
+                  onClick={() => searchSuccess(start, end, inputStatus)}
                   color="primary"
                   variant="contained"
                 >

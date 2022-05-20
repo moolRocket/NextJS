@@ -29,7 +29,6 @@ export const ProductListToolbar = (props) => {
   const searchProducts = useCallback((start, end) => {
     const startDate = getFormatDate(start);
     const endDate = getFormatDate(end);
-    console.log(startDate, endDate)
 
     dispatch({
       type: 'LOAD_PRODUCTS_DATA_REQUEST',
@@ -41,15 +40,13 @@ export const ProductListToolbar = (props) => {
   }, []);
 
   const { products_sn } = useSelector(state => state.products);
-  console.log("sn", products_sn);
 
   const makeLot = useCallback((products_sn) => {
     ll(products_sn);
 
   }, []);
 
-  const ll = async(products_sn)=>{ 
-    console.log("products_sn makelot herer", products_sn);
+  const ll = async(products_sn)=>{
     await dispatch({
       type: 'MAKE_LOT_REQUEST',
       products_sn
@@ -73,7 +70,6 @@ export const ProductListToolbar = (props) => {
   }, []);
 
   const ll2 = async() => {
-    console.log("ll2 toolbar auto lit");
 
     await dispatch({
       type: 'MAKE_AUTO_LOT_REQUEST'
@@ -93,7 +89,6 @@ export const ProductListToolbar = (props) => {
   }
 
   const onClickAutoLot = async () => {
-    console.log("**********************>>")
     await makeAutoLot();
     await setTimeout(() => {
       autolotup();

@@ -1,5 +1,4 @@
 import { Avatar, Card, CardContent, Grid, Typography } from '@mui/material';
-import PaidIcon from '@mui/icons-material/Paid';
 import { useSelector } from 'react-redux';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import CountUp from 'react-countup';

@@ -14,7 +14,8 @@ async function bidsData(params) {
             'Content-Type': 'multipart/form-data;charset=UTF-8'
         } 
     });
-}
+};
+
 function* loadBidsData(action) {
     try {
         const result = yield call(bidsData, action.params);
@@ -24,6 +25,7 @@ function* loadBidsData(action) {
         yield put({type:'LOAD_BIDS_DATA_FAILURE', e});
     }
 };
+
 function* lastLoadData3() {
     yield takeLatest('LOAD_BIDS_DATA_REQUEST', loadBidsData);
 };
@@ -39,6 +41,7 @@ async function bidDetailsData(bid_sn_one) {
         } 
     })
 }
+
 function* loadBidDetailsData(action) {
     try {
         const result = yield call(bidDetailsData, action.bid_sn_one);
@@ -48,6 +51,7 @@ function* loadBidDetailsData(action) {
         yield put({type:'LOAD_BIDS_DETAIL_FAILURE', e});
     }
 }
+
 function* lastLoadBidDetailData() {
     yield takeLatest('LOAD_BIDS_DETAIL_REQUEST', loadBidDetailsData);
 

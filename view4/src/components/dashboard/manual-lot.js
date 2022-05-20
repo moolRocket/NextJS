@@ -1,5 +1,4 @@
-import { Avatar, Box, Card, CardContent, Grid, Typography } from '@mui/material';
-import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
+import { Avatar, Box, Card, CardContent, Grid, Typography } from '@mui/material'
 import FaceIcon from '@mui/icons-material/Face';
 import { useSelector } from 'react-redux';
 import CountUp from 'react-countup';

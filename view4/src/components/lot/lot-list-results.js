@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import PerfectScrollbar from 'react-perfect-scrollbar';
-import PropTypes from 'prop-types';
-import { format } from 'date-fns';
 import {
-  Box, Button, Card, Checkbox, Collapse,
+  Box, Card, Collapse,
   Table, TableBody, TableCell, TableHead,
-  TableRow, TextField, Typography, IconButton
+  TableRow, Typography, IconButton
 } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';

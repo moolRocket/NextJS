@@ -45,6 +45,7 @@ function Row(props) {
       successDetail.PRODUCT_UNIT_PRICE
     ))
   })
+  
   const numberformatChange = (event) => {
     setNumber({
       ...number,
@@ -58,10 +59,12 @@ function Row(props) {
       bid_sn_one: BID_SN
     })
   }
+
   const onClickDetails = async (BID_SN) => {
     searchBidDetails(BID_SN);
     setOpen([!open[0], BID_SN]);
   }
+  
   return (
     <>
 
@@ -88,10 +91,10 @@ function Row(props) {
           </IconButton>
         </TableCell>
         <TableCell>
-          {((suc.BID_DECIDE_TIME).split(' '))[0]}
+          {((suc.BID_START_TIME.split(' '))[0])}
         </TableCell>
         <TableCell>
-          {((suc.BID_DECIDE_TIME).split(' '))[1]}
+          {((suc.BID_END_TIME.split(' '))[0])}
         </TableCell>
         <TableCell>
           {suc.BID_SN}
@@ -209,9 +212,11 @@ function Row(props) {
 }
 
 export const SuccessListResults = ({ ...rest }) => {
-
-  const { success, bid_sn, successDetails } = useSelector(state => state.success);
-
+  const { success, bidding, bid_sn, successDetails, inputStatus } = useSelector(state => state.success);
+  console.log("success는 바로 !!!!", success);
+  console.log("bidding는 바로 !!!!", bidding);
+  console.log("inputStatus 왔니?", inputStatus)
+  console.log("inputStatusinputStatus 왔니?", inputStatus.inputStatus)
   return (
     <Card {...rest}>
       <PerfectScrollbar>
@@ -221,10 +226,10 @@ export const SuccessListResults = ({ ...rest }) => {
               <TableRow>
                 <TableCell />
                 <TableCell>
-                  낙찰확정일자
+                  입찰시작일
                 </TableCell>
                 <TableCell>
-                  낙찰확정시간
+                  입찰종료일
                 </TableCell>
                 <TableCell>
                   입찰번호
@@ -256,7 +261,9 @@ export const SuccessListResults = ({ ...rest }) => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {success.map((suc) => (
+              {inputStatus.inputStatus === 'suc_bid' ? success.map((suc) => (
+                <Row key={suc.BID_SN} suc={suc} successDetails={successDetails} />
+              )) : bidding.map((suc) => (
                 <Row key={suc.BID_SN} suc={suc} successDetails={successDetails} />
               ))}
             </TableBody>

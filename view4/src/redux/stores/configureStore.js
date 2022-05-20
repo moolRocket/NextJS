@@ -21,6 +21,7 @@ const configureStore = (initialState, options) => {
     // store에 rootSaga를 넣은 sagaMiddleware를 실행시켜준다.
     return store;
 }
+
 // next js는 유저가 페이지를 요청할때마다 리덕스 스토어 생성함
 const wrapper = createWrapper(configureStore, {
     debug: process.env.NODE_ENV === 'development'

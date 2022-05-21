@@ -36,13 +36,10 @@ export const SuccessListToolbar = (props) => {
     setInputStatus(radioBtnName)
   }
 
-  console.log("11111111 inputStatus !!!!!!!!는", inputStatus);
-
   const searchSuccess1 = useCallback((start, end, inputStatus) => {
     const startDate = getFormatDate(start)
     const endDate = getFormatDate(end)
     
-    console.log("222222222 inputStatus !!!!!!!!는", inputStatus);
     dispatch({
       type: 'INPUT_STATUS_REQUEST',
       inputStatus: {
@@ -108,7 +105,7 @@ export const SuccessListToolbar = (props) => {
                   <RadioGroup
                     row
                     aria-labelledby="demo-radio-buttons-group-label"
-                    defaultValue="진행중"
+                    defaultValue="입찰 진행중"
                     name="radio-buttons-group"
                   >
                     <FormControlLabel value={inputStatus} checked={inputStatus === "bidding"} control={<Radio />} label="입찰 진행중" onChange={() => 

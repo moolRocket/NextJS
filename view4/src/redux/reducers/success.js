@@ -32,7 +32,6 @@ const reducer = (state=initialState, action) => {
             };
         case INPUT_STATUS_REQUEST:
             const inputStatus = action.inputStatus;
-            console.log("inputStatus!!!!!!@#!@#!@#!@#!@#!@#", inputStatus)
             return {
                 ...state, 
                 inputStatus
@@ -50,7 +49,6 @@ const reducer = (state=initialState, action) => {
             return {...state};
         case LOAD_BIDDING_DATA_SUCCESS:
             const bidding = action.data.data;
-            console.log("2번째 비딩 확인", bidding)
             return {...state, bidding};
         case LOAD_BIDDING_DATA_FAILURE:
             return {...state};

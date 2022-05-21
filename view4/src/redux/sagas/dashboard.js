@@ -5,7 +5,6 @@ const local_v2 = "http://192.168.0.251:9090/v2"
 const gcp_v2 = "http://34.64.172.190:9090/v2"
 
 async function progressStatus () {
-    console.log("2> progressStatus");
     return await axios({
         method:"GET",
         url: `${gcp_v2}/bid/find-graph-bid`,

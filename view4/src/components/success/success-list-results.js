@@ -16,6 +16,8 @@ function Row(props) {
   const { suc, bid_sn, successDetails } = props;
   const [open, setOpen] = useState([false, 0]);
   const [selectedBidSns, setSelectedBidSns] = useState([]);
+
+  const { inputStatus } = useSelector(state => state.success);
   
   const searchBidDetails = (BID_SN) => {
     dispatch({
@@ -53,12 +55,22 @@ function Row(props) {
         <TableCell>
           {suc.BID_SN}
         </TableCell>
+        { inputStatus.inputStatus == 'suc_bid' ?
+        <TableCell>
+          {((suc.BID_DECIDE_TIME).split(' '))[0]}
+        </TableCell>
+        :
         <TableCell>
           {((suc.BID_START_TIME.split(' '))[0])}
+        </TableCell> }
+        { inputStatus.inputStatus == 'suc_bid' ?
+        <TableCell>
+          {((suc.BID_DECIDE_TIME).split(' '))[1]}
         </TableCell>
+        :
         <TableCell>
           {((suc.BID_END_TIME.split(' '))[0])}
-        </TableCell>
+        </TableCell> }
         <TableCell>
           {suc.SUM_WEIGHT}
         </TableCell>
@@ -174,10 +186,6 @@ function Row(props) {
 
 export const SuccessListResults = ({ ...rest }) => {
   const { success, bidding, bid_sn, successDetails, inputStatus } = useSelector(state => state.success);
-  console.log("success는 바로 !!!!", success);
-  console.log("bidding는 바로 !!!!", bidding);
-  console.log("inputStatus 왔니?", inputStatus)
-  console.log("inputStatusinputStatus 왔니?", inputStatus.inputStatus)
   return (
     <Card {...rest}>
       <PerfectScrollbar>
@@ -189,12 +197,22 @@ export const SuccessListResults = ({ ...rest }) => {
                 <TableCell>
                   입찰번호
                 </TableCell>
+                {inputStatus.inputStatus == 'suc_bid' ?
+                <TableCell>
+                  낙찰확정일자
+                </TableCell>
+                :
                 <TableCell>
                   입찰시작일
+                </TableCell>}
+                {inputStatus.inputStatus == 'suc_bid' ?
+                <TableCell>
+                  낙찰확정시간
                 </TableCell>
+                :
                 <TableCell>
                   입찰종료일
-                </TableCell>
+                </TableCell>}
                 <TableCell>
                   총 중량
                 </TableCell>

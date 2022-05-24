@@ -45,13 +45,17 @@ function Row(props) {
   const start = search_date.startDate;
   const end = search_date.endDate;
 
-  const getFormatDate=(date)=> {
+  const getFormatDateTime = (date) => {
     var year = date.getFullYear();
     var month = (1 + date.getMonth());
-    month = month >= 10 ? month: '0' + month;
+    month = month >= 10 ? month : '0' + month;
     var day = date.getDate();
     day = day >= 10 ? day : '0' + day;
-    return year + '-' + month + '-' + day;
+    var hours = date.getHours();
+    var min = date.getMinutes();
+    var sec = date.getSeconds();
+
+    return year + '-' + month + '-' + day + ' '+ hours+ ':' + min+ ':' + sec;
   }
 
   const [bidEndDate, setBidEndDate] = useState(new Date());
@@ -88,8 +92,9 @@ function Row(props) {
   }
 
   const makeSuccess = async (BID_SN, bidStartDate, bidEndDate) => {
-    const updateStartDate = getFormatDate(bidStartDate);
-    const updateEndDate = getFormatDate(bidEndDate);
+    const updateStartDate = getFormatDateTime(bidStartDate);
+    const updateEndDate = getFormatDateTime(bidEndDate);
+
     dispatch({
       type:'MAKE_SUCCESS_DATA_REQUEST',
       params: {

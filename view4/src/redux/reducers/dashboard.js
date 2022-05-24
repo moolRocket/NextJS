@@ -1,5 +1,5 @@
 export const initialState = {
-    progressStatus : {data:[{COUNT:22}, {COUNT:25}, {COUNT:53}]},
+    progressStatus : {data:[{COUNT:11}, {COUNT:34}, {COUNT:55}]},
     performance: {
         data: {
             "lastweek":[
@@ -13,7 +13,7 @@ export const initialState = {
               ], 
             "thisweek":[
                 { '날짜': '2022-05-23', '금액': 108000 },
-                { '날짜': '2022-05-24', '금액': 29100 },
+                { '날짜': '2022-05-24', '금액': 62200 },
                 { '날짜': '2022-05-25', '금액': 0 },
                 { '날짜': '2022-05-26', '금액': 0 },
                 { '날짜': '2022-05-27', '금액': 0 },

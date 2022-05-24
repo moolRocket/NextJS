@@ -21,10 +21,10 @@ export const initialState = {
                 { '날짜': '2022-05-08', '금액': 0 }
               ]}},
             
-    autoLotNum:'55',
-    manualLotNum:'21',
+    autoLotNum:'62',
+    manualLotNum:'17',
     averageNum:'2',
-    waitingForDispatch:'15'
+    waitingForDispatch:'42'
 }
 
 export const LOAD_PROGRESS_STATUS_REQUEST = 'LOAD_PROGRESS_STATUS_REQUEST';
